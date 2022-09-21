@@ -1,6 +1,6 @@
 <?php
 $connect = file_get_contents('http://loripsum.net/api');
-$wyszukaj="l";
+$wyszukaj="";
 function ArraySort($tablica, $szukaj){
     $powrot;
     $tablica = explode(' ', $tablica);
@@ -11,6 +11,9 @@ function ArraySort($tablica, $szukaj){
     }
     }
     for($i=0, $zwrot=""; $i<count($powrot);$i++){
+        if ($szukaj=="" && $i==0){
+            $i = $i + 5;
+        }
         $zwrot .= $powrot[$i];
     }
     return $zwrot;
