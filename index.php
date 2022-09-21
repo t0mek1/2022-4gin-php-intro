@@ -1,6 +1,7 @@
 <?php
 $connect = file_get_contents('http://loripsum.net/api');
 $wyszukaj="";
+$cols=5;
 function ArraySort($tablica, $szukaj){
     $powrot;
     $tablica = explode(' ', $tablica);
@@ -18,23 +19,25 @@ function ArraySort($tablica, $szukaj){
     }
     return $zwrot;
 }
-$dane = ArraySort($connect, $wyszukaj);
-$tabela= "";
-$tabela .= "<table>";
-for($i=0; $i<count($dane);$i++){
-    if($i%4==0){
-    $tabela .="<tr>";
-    }
-    if ($i<4){
-        $tabela .="<th>".$dane[$i]."</th>";
-    } else {
-        $tabela .="<td>".$dane[$i]."</td>";
-    }
-    if($i%4==3){
-        $tabela .="</tr>";
+function renderHTMLTable($tablica, $szukaj, $kolumny){
+    $dane = ArraySort($tablica, $szukaj);
+    $tabela= "";
+    $tabela .= "<table>";
+    for($i=0; $i<count($dane);$i++){
+        if($i%$kolumny==0){
+        $tabela .="<tr>";
         }
+        if ($i<$kolumny){
+            $tabela .="<th>".$dane[$i]."</th>";
+        } else {
+            $tabela .="<td>".$dane[$i]."</td>";
+        }
+        if($i%$kolumny==$kolumny-1){
+            $tabela .="</tr>";
+            }
+    }
+    $tabela .= "</table>";
+    return $tabela;
 }
-$tabela .= "</table>";
-echo $tabela;
-//3.2 jest juz w 3.1
+echo renderHTMLTable($connect, $wyszukaj, $cols);
 ?>
