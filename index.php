@@ -10,13 +10,30 @@ function ArraySort($tablica, $szukaj){
             $powrot[]= $z[0]."<br>";
     }
     }
-    for($i=0, $zwrot=""; $i<count($powrot);$i++){
+    for($i=0, $zwrot; $i<count($powrot);$i++){
         if ($szukaj=="" && $i==0){
             $i = $i + 5;
         }
-        $zwrot .= $powrot[$i];
+        $zwrot[]= $powrot[$i];
     }
     return $zwrot;
 }
-echo ArraySort($connect, $wyszukaj);
+$dane = ArraySort($connect, $wyszukaj);
+$tabela= "";
+$tabela .= "<table>";
+for($i=0; $i<count($dane);$i++){
+    if($i%4==0){
+    $tabela .="<tr>";
+    }
+    if ($i<4){
+        $tabela .="<th>".$dane[$i]."</th>";
+    } else {
+        $tabela .="<td>".$dane[$i]."</td>";
+    }
+    if($i%4==3){
+        $tabela .="</tr>";
+        }
+}
+$tabela .= "</table>";
+echo $tabela;
 ?>
