@@ -36,4 +36,5 @@ for($i=0; $i<count($dane);$i++){
 }
 $tabela .= "</table>";
 echo $tabela;
+//3.2 jest juz w 3.1
 ?>
